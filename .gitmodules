@@ -4,3 +4,6 @@
 [submodule "static/applications/CSnap-Modules"]
 	path = static/applications/CSnap-Modules
 	url = https://github.com/CSnap/CSnap-Modules
+[submodule "static/BlocksCAD"]
+	path = static/BlocksCAD
+	url = https://github.com/CSnap/BlocksCAD.git

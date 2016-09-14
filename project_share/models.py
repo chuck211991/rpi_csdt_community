@@ -69,6 +69,7 @@ class Application(models.Model):
     application_type = models.CharField(max_length=5, choices= (
             ('CSNAP', 'cSnap'),
             ('BLOCK', 'Blockly/Scratch'),
+            ('CAD', 'BlocksCAD'),
         ))
     application_file = models.FileField(upload_to=application_application, null=True, blank=True)
 

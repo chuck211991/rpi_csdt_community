@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.conf.urls import url
+from django.views import static
 from django.views.generic.base import TemplateView
 
 from project_share.views import ProjectList, ProjectTagList, ApplicationList, DemoList
@@ -28,7 +30,9 @@ urlpatterns = [
 
     url(r'applications/$', ApplicationList.as_view(), name='application-list'),
     url(r'applications/(?P<pk>\d+)$', ApplicationDetail.as_view(), name='application-detail'),
-    url(r'applications/(?P<pk>\d+)/run$', ApplicationRunDetail.as_view(), name='application-run-detail'),
+    url(r'applications/(?P<pk>\d+)/run/$', ApplicationRunDetail.as_view(), name='application-run-detail'),
+    # Some applications attempt to load files from their location, relatively
+    url(r'applications/(\d+)/run/(?P<path>.*)', static.serve, {'document_root': settings.STATIC_ROOT + 'BlocksCAD/',}),
     
     url(r'^demos/$', DemoList.as_view(), name='demo-list'),
     url(r'^demos/(?P<pk>\d+)$', DemoDetail.as_view(), name='demo-detail'),
