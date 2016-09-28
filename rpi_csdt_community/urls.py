@@ -25,7 +25,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
     # TemplateView + Login
-    url(r'^$', home, {}, 'home'),
+    url(r'^$', TemplateView.as_view(template_name="landing.html"), name='landing'),
+    url(r'^home$', home, {}, 'home'),
     #url(r'^$', login_required(TemplateView.as_view(template_name="home.html")), {}, 'home'),
 
     url(r'', include('project_share.urls')),

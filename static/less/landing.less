@@ -1,0 +1,73 @@
+@import "bootstrap.less";
+/* Include theme settings */
+
+@icon-font-path: "/static/twitter_bootstrap/fonts/";
+
+body {
+  background: black;
+}
+
+/* Should be called on <div class="@this"><div></div></div> */
+.make-background (@background_url, @top, @height: 32.5vh) {
+    width: 100%;
+    height: @height;
+    position: absolute;
+    background: url(@background_url) center center;
+    background-size: cover;
+    top: @top;
+    margin-top: 0px;
+    z-index: -500;
+    div {
+      top: @top;
+      width: 100%;
+      height: 33vh;
+      background: black;
+      opacity: 0.4;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+      z-index: -499;
+    }
+}
+
+/* Should be called on <div class="container @this"><div class="jumbotron inner">...</div></div> */
+.make-jumbotron (@height: 33vh) {
+  height: @height;
+  padding-top: 7vh;
+
+  .inner {
+    background-color: fade(@jumbotron-bg, 80%);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    h1 {
+      margin-top: 6px;
+    }
+  }
+}
+
+.page {
+  &:extend(.container);
+  width: 100%;
+  height: 100vh;
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+
+  .student-background {
+    .make-background("/static/images/quad.png", 0px);
+  }
+  .teacher-background {
+    .make-background("/static/images/empac.png", 33vh);
+  }
+  .other-background {
+    .make-background("/static/images/panorama.png", 66vh);
+  }
+
+  .students {
+    .make-jumbotron();
+  }
+  .teachers {
+    .make-jumbotron();
+  }
+  .others {
+    .make-jumbotron();
+  }
+}
