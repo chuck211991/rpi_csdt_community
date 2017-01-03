@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.contrib.auth.forms import AuthenticationForm
@@ -27,6 +29,9 @@ def home(request):
         'projects_newest': projects_newest
     })
 
+def render_culture_page(request, **kwargs):
+    path = os.path.join("rpi_csdt_community/culture/", kwargs["page_name"])
+    return render(request, path)
+
 def return_true(req):
     return True
-

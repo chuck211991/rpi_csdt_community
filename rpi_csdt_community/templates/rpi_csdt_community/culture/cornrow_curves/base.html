@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+   <div class="navbar-header">
+     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+   </div>
+   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     <ul class="nav navbar-nav">
+       <li id="about"><a href="{% url 'culture_page' page_name='cornrow_curves/about.html' %}">About</a></li>
+       <li id="cultural_context"><a href="{% url 'culture_page' page_name='cornrow_curves/cultural_context.html' %}">Cultural Context</a></li>
+       <li id="math_tutorial"><a href="{% url 'culture_page' page_name='cornrow_curves/about.html' %}">Math Tutorial</a></li>
+       <li id="programming_tutorial"><a href="{% url 'culture_page' page_name='cornrow_curves/about.html' %}">Programming Tutorial</a></li>
+       <li id="bibliography"><a href="{% url 'culture_page' page_name='cornrow_curves/about.html' %}">Bibliography</a></li>
+       <li id="launch_software"><a href="{% url 'culture_page' page_name='cornrow_curves/about.html' %}">Launch Software</a></li>
+       <li id="teaching_materials"><a href="{% url 'culture_page' page_name='cornrow_curves/about.html' %}">Teaching Materials</a></li>
+     </ul>
+   </div>
+  </div>
+</nav>
+
+{% if active %}
+  <!-- Ugly solution to make menu items active -->
+  <script>
+    document.getElementById('{{ active }}').className += " active";
+  </script>
+{% endif %}
+{% endblock %}

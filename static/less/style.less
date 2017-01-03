@@ -46,6 +46,16 @@ body {
     }
 }
 
+.two-column-5-7 {
+    .make-row();
+    .column-left {
+        .make-md-column(5);
+    }
+    .column-right {
+        .make-md-column(7);
+    }
+}
+
 .thumbnails {
     .make-row();
 
@@ -243,7 +253,7 @@ a.liker {
 }
 
 /*Responsive Styles*/
- 
+
  @media screen and (max-width : 1000px){
  /*Make dropdown links appear inline*/
  	#CMS_Menu ul ul {
@@ -258,7 +268,7 @@ a.liker {
  	#CMS_Menu ul li, li a {
  		width: 100%;
  	}
- 	
+
  	#CMS_Menu ul li:hover > ul
  	{
  		display:block;

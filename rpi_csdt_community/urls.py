@@ -9,7 +9,7 @@ admin.autodiscover()
 
 from rpi_csdt_community.viewsets import ProjectViewSet, DemosViewSet, GoalViewSet, ApplicationViewSet, FileUploadView, CurrentUserView, TeamViewSet
 from rpi_csdt_community.viewsets import ApplicationThemeViewSet, ApplicationCategoryViewSet
-from rpi_csdt_community.views import home
+from rpi_csdt_community.views import home, render_culture_page
 from django.views import static
 from rest_framework import routers
 router = routers.DefaultRouter()
@@ -21,7 +21,7 @@ router.register(r'application', ApplicationViewSet, base_name='api-modules')
 router.register(r'theme', ApplicationThemeViewSet, base_name='api-themes')
 router.register(r'category', ApplicationCategoryViewSet, base_name='api-category')
 
-		
+
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -32,6 +32,8 @@ urlpatterns = [
 
     url(r'', include('project_share.urls')),
     url(r'teams/', include('django_teams.urls')),
+
+    url(r'^culture/(?P<page_name>.*)$', render_culture_page, name='culture_page'),
 
     url(r'^accounts/', include('allauth.urls')),
 
