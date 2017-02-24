@@ -45,6 +45,7 @@ Markdown~=2.6.7
 numpy~=1.11.2
 oauthlib~=2.0.0
 Pillow~=3.4.2
+psycopg2~=2.6.2
 pybbm~=0.18.3
 pytz~=2016.7
 PyYAML~=3.12
