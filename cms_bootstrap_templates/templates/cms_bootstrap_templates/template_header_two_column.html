@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load cms_tags sekizai_tags %}
+{% load static %}
 
 {% block content %}
         <div class="container">
@@ -17,7 +18,7 @@
         </div>
 {% block extra_style %}
     <!-- Temporary work around for the less issue -->
-    <link rel="stylesheet" type="text/less" media="all" href="{{ STATIC_URL }}cms_bootstrap_templates/less/template_header_two_columns.less" />
+    <link rel="stylesheet" type="text/less" media="all" href="{% static 'cms_bootstrap_templates/less/template_header_two_columns.less'%}" />
 {% endblock %}
 
 {% endblock %}

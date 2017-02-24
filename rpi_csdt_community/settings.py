@@ -16,17 +16,29 @@ ADMINS = (
 )
 
 MANAGERS = ADMINS
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': PROJECT_ROOT + '/database.sqlite3',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travisci',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': PROJECT_ROOT + '/database.sqlite3',                      # Or path to database file if using sqlite3.
+            # The following settings are not used with sqlite3:
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': '',                      # Set to empty string for default.
+        }
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -94,7 +106,7 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'n)ntn6k*y6tt5zd5m!0$&qd$y_*rpv5m87-ld4f7suj8%shd^4'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -108,7 +120,7 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
-)
+]
 
 ROOT_URLCONF = 'rpi_csdt_community.urls'
 
@@ -169,18 +181,14 @@ INSTALLED_APPS = (
     'jquery',
 
 
-#    'filer',
-#    'easy_thumbnails',
+    'easy_thumbnails',
+    'filer',
 
     'attachments',
-
-    'sorl.thumbnail',
 
     'extra_views',
 
     'django_markup',
-#    'pybb',
-#    'south',
     'rest_framework',
     'django_teams',
     'django_comments_xtd',
@@ -260,6 +268,14 @@ REST_FRAMEWORK = {
 
 THUMBNAIL_DEBUG = False
 
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+
 TEXT_HTML_SANITIZE = False
 
 
@@ -315,10 +331,20 @@ LOGGING = {
 
 WARNING_MESSAGE = "<strong>You are currently looking at the development site!</strong> None of this is real!"
 
+USE_CACHE = False
+
 try:
     from local_settings import *
 except:
     pass
+
+if USE_CACHE:
+    MIDDLEWARE_CLASSES += [
+        'django.middleware.cache.UpdateCacheMiddleware',
+        'django.middleware.common.CommonMiddleware',
+        'django.middleware.cache.FetchFromCacheMiddleware',
+    ]
+
 
 if ENABLE_GIS:
     # Make sure the database is configured as postgres
@@ -337,4 +363,3 @@ if ENABLE_GIS:
         CENSUS_API_KEY
     except NameError:
         raise "To use GIS, you need to define a CENSUS API KEY"
-print STATIC_ROOT

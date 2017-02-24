@@ -1,26 +1,65 @@
 CSDT Community Site
 ========
 
+[![Build Status](https://travis-ci.org/CSnap/rpi_csdt_community.svg?branch=master)](https://travis-ci.org/CSnap/rpi_csdt_community)
+
 This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship under Dr. Ron Eglash. The goal is the create a web platform for students to share projects, community, and in general create a community around the pCSDT's. More information about the pCSDT's can be found here: http://csdt.rpi.edu/
 
 ## How-to deploy for development
 
-To deploy this project, you will need the following packages installed:
+Before setup you need:
+* Python
 * Python Virtualenv
 * Python setup tools
-* Everything you need to compile python-pil
-    * This can be done (on debian-based systems) by running apt-get build-dep python-pil
-    * libz, libjpeg, libfreetype2
-* git, subversion, and mercurial (I know... but several of the packages I need haven't yet been updated in pypy)
+* Libpq-dev
+* Git
+* Subversion
+* Mercurial
+* NPM
+* This repo (clone, fork, or download)
 
-Now, the howto
+Setup for Linux:
 ```shell
 cd {{ Directory of this repo }}
 . ./activate
-python ./manage.py syncdb --all
-python ./manage.py migrate --fake
+sudo npm install -g less
+sudo npm install -g yuglify
+
+# For the time being you will need to select option 1 and timezone.now()
+python ./manage.py makemigrations
+python ./manage.py migrate
 git submodule init
 git submodule update
+
+# Enter credentials as desired
+python manage.py createsuperuser
+
+# Every time you start to develop, start the server
+#  It should auto refresh when you change a file
+python ./manage.py runserver
+```
+
+Setup for Windows
+
+```shell
+cd {{ Directory of this repo }}
+python virtualenv.py python
+python ./python/bin/activate
+sudo npm install -g less
+sudo npm install -g yuglify
+python pip install -r ./libraries.txt.lock
+python pip install -r ./libraries-vcs.txt
+python pip install -r ./libraries-heroku.txt
+npm install -g less
+
+# For the time being you will need to select option 1 and timezone.now()
+python ./manage.py makemigrations
+python ./manage.py migrate
+git submodule init
+git submodule update
+
+# Enter credentials as desired
+python manage.py createsuperuser
 
 # Every time you start to develop, start the server
 #  It should auto refresh when you change a file
@@ -29,15 +68,19 @@ python ./manage.py runserver
 
 Then you should be able to see the project at http://127.0.0.1:8000/
 
-## How-to deploy for production
-
-Too much work. I would suggest using mod_wsgi. There is a sample configuration file in the doc/ folder.
-
 ## How-to contribute
 
-Fork this repo, make your changes. Be sure to justify everything! Avoid anything too tricky, try to stick to Django's principles (reuse other libraries, DRY). When you're ready to share what you've done, make a pull request)
+* Fork repo or if already forked, pull this repo to get latest.
+* Make relevant issue on this repo
 
-Current Release
----------------
-
-The current release is 20160419.
+```shell
+cd {{ Directory of this repo }}
+git checkout -b {{name of changes to be made}}
+# Make changes
+git add -A
+git commit
+# Write a description
+git push origin {{name of changes}}
+# Make pull request on githup and reference your issue
+git checkout master
+```

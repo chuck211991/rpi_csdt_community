@@ -1,7 +1,7 @@
 bbcode
 BeautifulSoup
 coverage
-Django
+Django==1.9.5
 django-allauth
 django-analytical
 django-annoying
@@ -12,9 +12,10 @@ django-bootstrap3
 django-classy-tags
 django-cms
 django-comments-xtd
-django-compressor
+django-compressor==1.6
 django-contrib-comments
-django-extensions
+django-debug-toolbar
+django-extensions==1.6.7
 django-extra-views
 django-jquery
 django-markup
@@ -37,6 +38,8 @@ djangorestframework
 djangorestframework-csv
 djangorestframework-gis
 geopy
+gitpython
+html5lib<0.99999999
 Markdown
 numpy
 oauthlib
@@ -44,6 +47,5 @@ Pillow
 pybbm
 PyYAML
 six
-sorl-thumbnail
 pytz
 gitpython
