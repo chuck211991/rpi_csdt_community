@@ -6,9 +6,9 @@ This project is sponsered by Rensselaer Polytechnic Institute's GK-12 fellowship
 
 ## Contributing
 
-We encourage people to contribute; to do so, please follow the instructions at [https://github.com/CSnap/rpi_csdt_community/wiki/Development-Workflow](https://github.com/CSnap/rpi_csdt_community/wiki/Development-Workflow).
-
 If you just want to install the server locally, you can follow the instructions at [https://github.com/CSnap/rpi_csdt_community/wiki/Setting-up-for-Development](https://github.com/CSnap/rpi_csdt_community/wiki/Setting-up-for-Development0)
+
+We encourage people to contribute; to do so, please follow the instructions at [https://github.com/CSnap/rpi_csdt_community/wiki/Development-Workflow](https://github.com/CSnap/rpi_csdt_community/wiki/Development-Workflow).
 
 ## Related Projects
 
