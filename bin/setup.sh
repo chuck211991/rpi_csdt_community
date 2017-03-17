@@ -12,7 +12,7 @@ sudo apt-get upgrade
 sudo apt-get install -y python-pip python-dev
 
 # Install the database
-sudo apt-get install -y postgresql postgresql-contrib libpq-dev
+sudo apt-get install -y postgresql postgresql-contrib libpq-dev libcurl4-openssl-dev
 # Set password
 sudo -u postgres psql -U postgres -d postgres -c "alter user postgres with password 'postgres';"
 # Create the database
